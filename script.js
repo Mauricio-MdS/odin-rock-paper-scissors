@@ -5,13 +5,7 @@ function capitalize(string){
 
 function game(){
     for (round = 1; round < 6; round++) {
-        let playerSelection = prompt("Choose Rock, Paper, or Scissors");
-        playerSelection = capitalize(playerSelection);
-        while (isInvalidPlayerSelection(playerSelection)) {
-            alert("Invalid selection!")
-            playerSelection = prompt("Choose Rock, Paper, or Scissors");
-            playerSelection = capitalize(playerSelection);
-        }
+        let playerSelection = getPlayerChoice();
         let computerSelection = getComputerChoice();
         let roundResult = playRound(playerSelection, computerSelection);
         showRoundResult (round, roundResult, playerSelection, computerSelection);
@@ -22,6 +16,17 @@ function getComputerChoice() {
     const possibleChoices = ["Rock", "Paper", "Scissors"];
     const randomNumber = Math.floor(Math.random()*3)
     return possibleChoices[randomNumber];
+}
+
+function getPlayerChoice() {
+    let playerSelection = prompt("Choose Rock, Paper, or Scissors");
+    playerSelection = capitalize(playerSelection);
+    while (isInvalidPlayerSelection(playerSelection)) {
+        alert("Invalid selection!")
+        playerSelection = prompt("Choose Rock, Paper, or Scissors");
+        playerSelection = capitalize(playerSelection);
+    }
+    return playerSelection;
 }
 
 function isInvalidPlayerSelection(playerSelection) {
