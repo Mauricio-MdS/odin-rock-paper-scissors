@@ -4,12 +4,17 @@ function capitalize(string){
 }
 
 function game(){
+    let playerScore = 0;
+    let computerScore = 0;
     for (round = 1; round < 6; round++) {
         let playerSelection = getPlayerChoice();
         let computerSelection = getComputerChoice();
         let roundResult = playRound(playerSelection, computerSelection);
+        if (roundResult === "Win") playerScore++;
+        if (roundResult === "Lose") computerScore++;
         showRoundResult (round, roundResult, playerSelection, computerSelection);
     }
+    showEndGameResult(playerScore, computerScore);
 }
 
 function getComputerChoice() {
@@ -46,6 +51,23 @@ function playRound(playerSelection, computerSelection) {
         case "Scissors":
             return (computerSelection === "Paper") ? "Win" : "Lose";
     }
+}
+
+function showEndGameResult(playerScore, computerScore) {
+    console.log("===================");
+    switch(true) {
+        case (playerScore > computerScore):
+            console.log("You won the game!");
+            break;
+        case (playerScore < computerScore):
+            console.log("You lost the game!");
+            break;
+        default:
+            console.log("The game was a tie!");
+    }
+    console.log(`Player score:   ${playerScore}`);
+    console.log(`Computer score: ${computerScore}`);
+    console.log("===================");
 }
 
 function showRoundResult(round, result, playerSelection, computerSelection) {
