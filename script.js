@@ -14,7 +14,7 @@ function game(){
         }
         let computerSelection = getComputerChoice();
         let roundResult = playRound(playerSelection, computerSelection);
-        console.log(`Round ${round}: ${roundResult}`)
+        showRoundResult (round, roundResult, playerSelection, computerSelection);
     }
 }
 
@@ -29,19 +29,35 @@ function isInvalidPlayerSelection(playerSelection) {
 }
 
 function playRound(playerSelection, computerSelection) {
-    playerSelection = capitalize(playerSelection);
     if (playerSelection === computerSelection) {
-        return `It's a Tie! Both selected ${playerSelection}`
+        return "Tie";
     }
 
     switch(playerSelection) {
         case "Rock":
-            return (computerSelection === "Scissors") ? "You Win! Rock beats Scissors" : "You Lose! Paper beats Rock";
+            return (computerSelection === "Scissors") ? "Win" : "Lose";
         case "Paper":
-            return (computerSelection === "Rock") ? "You Win! Paper beats Rock" : "You Lose! Scissors beats Paper";
+            return (computerSelection === "Rock") ? "Win" : "Lose";
         case "Scissors":
-            return (computerSelection === "Paper") ? "You Win! Scissors beats Paper" : "You Win! Paper beats Scissors";
+            return (computerSelection === "Paper") ? "Win" : "Lose";
     }
+}
+
+function showRoundResult(round, result, playerSelection, computerSelection) {
+    let winningSelection;
+    let losingSelection;
+    if (result === "Win") {
+        winningSelection = playerSelection;
+        losingSelection = computerSelection;
+    } else {
+        winningSelection = computerSelection;
+        losingSelection = playerSelection;
+    }
+
+    console.log(
+        `Round ${round}: ${(result === "Tie") ? `It's a Tie! Both selected ${playerSelection}` : 
+        `You ${result}! ${winningSelection} beats ${losingSelection}`}`
+    )
 }
 
 game();
