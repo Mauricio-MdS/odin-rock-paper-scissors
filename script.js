@@ -1,4 +1,9 @@
 const roundPanel = document.querySelector("#round-panel");
+const playerPointsDisplay = document.querySelector("#player-points");
+const computerPointsDisplay = document.querySelector("#computer-points");
+
+let playerScore = 0;
+let computerScore = 0;
 
 function initializeGame() {
     const buttons = document.querySelectorAll(".selection-button");
@@ -8,7 +13,6 @@ function initializeGame() {
             playRound(playerChoice);
         })
     }
-
 }
 
 function game(){
@@ -49,7 +53,11 @@ function playRound(playerSelection) {
             result = (computerSelection === "Paper") ? "Win" : "Lose";
     }
 
-    showRoundResult(result, playerSelection, computerSelection)
+    showRoundResult(result, playerSelection, computerSelection);
+
+    (result === "Win") ? playerScore++ : computerScore++;
+
+    updatePointsDisplay();
 }
 
 function showEndGameResult(playerScore, computerScore) {
@@ -85,6 +93,11 @@ function showRoundResult(result, playerSelection, computerSelection) {
         `You ${result}! ${winningSelection} beats ${losingSelection}`}`;
     
     roundPanel.textContent = message;
+}
+
+function updatePointsDisplay() {
+    playerPointsDisplay.textContent = playerScore;
+    computerPointsDisplay.textContent = computerScore;
 }
 
 initializeGame();
