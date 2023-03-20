@@ -42,10 +42,13 @@ function playRound(playerSelection) {
     switch(playerSelection) {
         case "Rock":
             result = (computerSelection === "Scissors") ? "Win" : "Lose";
+            break;
         case "Paper":
             result =  (computerSelection === "Rock") ? "Win" : "Lose";
+            break;
         case "Scissors":
             result = (computerSelection === "Paper") ? "Win" : "Lose";
+            break;
     }
 
     showRoundResult(result, playerSelection, computerSelection);
