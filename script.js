@@ -86,5 +86,3 @@ function showRoundResult(round, result, playerSelection, computerSelection) {
         `You ${result}! ${winningSelection} beats ${losingSelection}`}`
     )
 }
-
-game();
