@@ -1,10 +1,11 @@
+const roundPanel = document.querySelector("#round-panel");
+
 function initializeGame() {
     const buttons = document.querySelectorAll(".selection-button");
     for (let button of buttons) {
         button.addEventListener("click", (event) => {
             const playerChoice = event.target.textContent;
-            const computerChoice = getComputerChoice();
-            console.log(playRound(playerChoice, computerChoice));
+            playRound(playerChoice);
         })
     }
 
@@ -30,19 +31,25 @@ function getComputerChoice() {
     return possibleChoices[randomNumber];
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+    const computerSelection = getComputerChoice();
+
     if (playerSelection === computerSelection) {
-        return "Tie";
+        return showRoundResult("Tie", playerSelection, computerSelection);
     }
+
+    let result;
 
     switch(playerSelection) {
         case "Rock":
-            return (computerSelection === "Scissors") ? "Win" : "Lose";
+            result = (computerSelection === "Scissors") ? "Win" : "Lose";
         case "Paper":
-            return (computerSelection === "Rock") ? "Win" : "Lose";
+            result =  (computerSelection === "Rock") ? "Win" : "Lose";
         case "Scissors":
-            return (computerSelection === "Paper") ? "Win" : "Lose";
+            result = (computerSelection === "Paper") ? "Win" : "Lose";
     }
+
+    showRoundResult(result, playerSelection, computerSelection)
 }
 
 function showEndGameResult(playerScore, computerScore) {
@@ -62,7 +69,7 @@ function showEndGameResult(playerScore, computerScore) {
     console.log("===================");
 }
 
-function showRoundResult(round, result, playerSelection, computerSelection) {
+function showRoundResult(result, playerSelection, computerSelection) {
     let winningSelection;
     let losingSelection;
     if (result === "Win") {
@@ -73,10 +80,11 @@ function showRoundResult(round, result, playerSelection, computerSelection) {
         losingSelection = playerSelection;
     }
 
-    console.log(
-        `Round ${round}: ${(result === "Tie") ? `It's a Tie! Both selected ${playerSelection}` : 
-        `You ${result}! ${winningSelection} beats ${losingSelection}`}`
-    )
+    const message =
+        `${(result === "Tie") ? `It's a Tie! Both selected ${playerSelection}` : 
+        `You ${result}! ${winningSelection} beats ${losingSelection}`}`;
+    
+    roundPanel.textContent = message;
 }
 
 initializeGame();
