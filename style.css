@@ -1,0 +1,18 @@
+#round-panel {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.selection-button {
+    padding: 10px;
+    font-size: 1em;
+}
+#score-panel {
+    font-size: 1em;
+    font-weight: bold;
+}
+#player-points {
+    color: blue;
+}
+#computer-points {
+    color: red;
+}
