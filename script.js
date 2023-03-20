@@ -10,12 +10,6 @@ function initializeGame() {
 
 }
 
-
-function capitalize(string){
-    string = string.toLowerCase();
-    return string.charAt(0).toUpperCase().concat(string.substr(1))
-}
-
 function game(){
     let playerScore = 0;
     let computerScore = 0;
@@ -34,21 +28,6 @@ function getComputerChoice() {
     const possibleChoices = ["Rock", "Paper", "Scissors"];
     const randomNumber = Math.floor(Math.random()*3)
     return possibleChoices[randomNumber];
-}
-
-function getPlayerChoice() {
-    let playerSelection = prompt("Choose Rock, Paper, or Scissors");
-    playerSelection = capitalize(playerSelection);
-    while (isInvalidPlayerSelection(playerSelection)) {
-        alert("Invalid selection!")
-        playerSelection = prompt("Choose Rock, Paper, or Scissors");
-        playerSelection = capitalize(playerSelection);
-    }
-    return playerSelection;
-}
-
-function isInvalidPlayerSelection(playerSelection) {
-    return (playerSelection !== "Rock" && playerSelection !== "Paper" && playerSelection !== "Scissors")
 }
 
 function playRound(playerSelection, computerSelection) {
