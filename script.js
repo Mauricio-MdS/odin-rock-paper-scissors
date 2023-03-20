@@ -1,3 +1,4 @@
+const buttons = document.querySelectorAll(".selection-button");
 const roundPanel = document.querySelector("#round-panel");
 const playerPointsDisplay = document.querySelector("#player-points");
 const computerPointsDisplay = document.querySelector("#computer-points");
@@ -6,13 +7,21 @@ let playerScore = 0;
 let computerScore = 0;
 
 function initializeGame() {
-    const buttons = document.querySelectorAll(".selection-button");
     for (let button of buttons) {
         button.addEventListener("click", (event) => {
             const playerChoice = event.target.textContent;
             playRound(playerChoice);
-        })
+        });
     }
+}
+
+function endGame() {
+    for (let button of buttons) {
+        button.setAttribute("disabled", "true");
+    }
+    const result = (playerScore > computerScore) ? "Win" : "Lose";
+    const playAgain = confirm(`You ${result}. Want to play again?`);
+    if (playAgain) restart();
 }
 
 function getComputerChoice() {
@@ -44,7 +53,19 @@ function playRound(playerSelection) {
     (result === "Win") ? playerScore++ : computerScore++;
 
     updatePointsDisplay();
-    
+
+    if (playerScore === 5 || computerScore === 5) endGame();
+
+}
+
+function restart() {
+    for (let button of buttons) {
+        button.removeAttribute("disabled");
+    }
+    roundPanel.textContent = "Rock, Paper, or Scissors?";
+    playerScore = 0;
+    computerScore = 0;
+    updatePointsDisplay();
 }
 
 function showRoundResult(result, playerSelection, computerSelection) {
