@@ -1,3 +1,16 @@
+function initializeGame() {
+    const buttons = document.querySelectorAll(".selection-button");
+    for (let button of buttons) {
+        button.addEventListener("click", (event) => {
+            const playerChoice = event.target.textContent;
+            const computerChoice = getComputerChoice();
+            console.log(playRound(playerChoice, computerChoice));
+        })
+    }
+
+}
+
+
 function capitalize(string){
     string = string.toLowerCase();
     return string.charAt(0).toUpperCase().concat(string.substr(1))
@@ -86,3 +99,5 @@ function showRoundResult(round, result, playerSelection, computerSelection) {
         `You ${result}! ${winningSelection} beats ${losingSelection}`}`
     )
 }
+
+initializeGame();
